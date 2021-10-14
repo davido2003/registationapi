@@ -6,8 +6,6 @@ from rest_framework import status
 from rest_framework import generics, mixins
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
 from . serializers import SignupSerializer, loginSerializer
 from . models import SignUp, login
 # Create your views here.
@@ -15,8 +13,6 @@ from . models import SignUp, login
 class SignupAPIView(generics.GenericAPIView, mixins.CreateModelMixin,mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     serializer_class = SignupSerializer
     queryset = SignUp.objects.all()
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
-    permission_classes = [IsAuthenticated]
     lookup_field = 'id'
 
     def  get(self,request,id=None):
@@ -34,8 +30,6 @@ class SignupAPIView(generics.GenericAPIView, mixins.CreateModelMixin,mixins.Retr
 class loginAPIView(generics.GenericAPIView, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     serializer_class = loginSerializer
     queryset = login.objects.all()
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
-    permission_classes = [IsAuthenticated]
     lookup_field = 'id'
 
     def  get(self,request,id=None):
